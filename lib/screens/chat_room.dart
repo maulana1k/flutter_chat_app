@@ -1,8 +1,6 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/bx.dart';
-import 'package:iconify_flutter/icons/uil.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -16,22 +14,28 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         titleSpacing: 0,
         backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
-        shape: Border(bottom: BorderSide(color: Colors.grey.shade300)),
+        shape: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(FluentIcons.chevron_left_16_filled)),
         title: const Row(
           children: [
             CircleAvatar(
-              radius: 20,
+              radius: 18,
               backgroundImage: NetworkImage('https://bit.ly/dan-abramov'),
             ),
             SizedBox(width: 10),
-            Text('Erick Ganteng', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
+            Text('Erick Ganteng', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))
           ],
         ),
-        actions: [IconButton(onPressed: () {}, icon: const Iconify(Bx.dots_vertical))],
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(FluentIcons.more_vertical_16_filled))
+        ],
       ),
       body: Column(
         children: [
@@ -80,38 +84,56 @@ class _MessageTextFieldState extends State<MessageTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white, border: Border(top: BorderSide(color: Colors.grey.shade200))),
-      // padding: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.only(bottom: 4, left: 12, right: 4),
       child: Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              // IconButton(onPressed: () {}, icon: const Icon(FluentIcons.link_16_filled)),
-              Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: IconButton(
-                      onPressed: toggleEmojiPicker,
-                      icon: Iconify(_isEmojiOpen ? Uil.keyboard : Uil.emoji))),
               Expanded(
-                child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  controller: _messageTextController,
-                  focusNode: _focusNode,
-                  minLines: 1,
-                  maxLines: 10,
-                  decoration: const InputDecoration(
-                      isDense: true,
-                      hintText: 'Message',
-                      border: OutlineInputBorder(borderSide: BorderSide.none)),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100, borderRadius: BorderRadius.circular(30)),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton(
+                          onPressed: toggleEmojiPicker,
+                          icon: Icon(
+                              _isEmojiOpen
+                                  ? FluentIcons.keyboard_16_filled
+                                  : FluentIcons.emoji_16_filled,
+                              color: Colors.grey)),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: TextField(
+                            keyboardType: TextInputType.multiline,
+                            controller: _messageTextController,
+                            focusNode: _focusNode,
+                            minLines: 1,
+                            maxLines: 10,
+                            decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                                isDense: true,
+                                hintText: 'Message',
+                                border: OutlineInputBorder(borderSide: BorderSide.none)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child:
-                    IconButton(onPressed: () {}, icon: const Iconify(Bx.send), color: Colors.blue),
-              )
+              const SizedBox(width: 4),
+              IconButton(
+                  padding: const EdgeInsets.all(12),
+                  visualDensity: VisualDensity.adaptivePlatformDensity,
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Theme.of(context).colorScheme.primary)),
+                  onPressed: () {},
+                  icon: const Icon(FluentIcons.send_16_filled, color: Colors.white, size: 22))
             ],
           ),
           if (_isEmojiOpen)

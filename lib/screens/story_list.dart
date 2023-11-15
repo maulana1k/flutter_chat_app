@@ -29,7 +29,7 @@ class StoryList extends StatelessWidget {
                   child: Container(
                       padding: const EdgeInsets.all(3),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: const Icon(FluentIcons.add_16_filled, size: 16, color: Colors.white)),

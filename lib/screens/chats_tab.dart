@@ -9,6 +9,7 @@ class ChatsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return NestedScrollView(
       floatHeaderSlivers: true,
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -18,39 +19,37 @@ class ChatsTab extends StatelessWidget {
             scrolledUnderElevation: 0,
             backgroundColor: Colors.white,
             title: Text('Chats',
-                style: const TextStyle(fontWeight: FontWeight.bold).copyWith(fontSize: 32)),
+                style: const TextStyle(fontWeight: FontWeight.bold).copyWith(fontSize: 28)),
             actions: [
-              IconButton(
-                  onPressed: () {}, iconSize: 28, icon: const Icon(FluentIcons.compose_20_filled)),
+              IconButton(onPressed: () {}, icon: const Icon(FluentIcons.search_20_filled)),
+              IconButton(onPressed: () {}, icon: const Icon(FluentIcons.compose_20_filled)),
+              IconButton(onPressed: () {}, icon: const Icon(FluentIcons.more_vertical_20_filled)),
             ],
-            bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(kToolbarHeight - 10),
-                child: Container(
-                  padding: const EdgeInsets.all(6),
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200], borderRadius: BorderRadius.circular(12)),
-                  child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(FluentIcons.search_16_filled, color: Colors.grey[500], size: 22),
-                      const SizedBox(width: 4),
-                      Text('Search', style: TextStyle(color: Colors.grey[500], fontSize: 18))
-                    ],
-                  ),
-                )),
           ),
         ];
       },
-      body: const SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+      body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 0),
           child: Column(
             children: [
-              ChatsTile(),
-              ChatsTile(),
-              ChatsTile(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  children: [
+                    const Text('All chats', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(width: 8),
+                    Badge(
+                      backgroundColor: cs.primary,
+                      label: const Text('14'),
+                    )
+                  ],
+                ),
+              ),
+              const ChatsTile(),
+              const ChatsTile(),
+              const ChatsTile(),
             ],
           ),
         ),

@@ -11,7 +11,7 @@ class ChatsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
+    var cs = Theme.of(context).colorScheme;
     return InkWell(
       onTap: () {
         Navigator.push(context, CupertinoPageRoute(builder: (context) => const ChatRoom()));
@@ -33,22 +33,20 @@ class ChatsTile extends StatelessWidget {
                 children: [
                   Text('Erick Ganteng',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                          color: colorScheme.onBackground)),
+                          fontWeight: FontWeight.bold, fontSize: 16, color: cs.onBackground)),
                   Text(
                     'Lagi sibuk gak?',
-                    style: TextStyle(fontSize: 15, color: colorScheme.secondary),
+                    style: TextStyle(fontSize: 15, color: cs.secondary),
                   )
                 ],
               ),
             ),
             Column(
               children: [
-                Text('4h', style: TextStyle(color: colorScheme.secondary, fontSize: 14)),
+                Text('4h', style: TextStyle(color: cs.secondary, fontSize: 14)),
                 Container(
                     padding: const EdgeInsets.all(8),
-                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: cs.primary),
                     child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 12)))
               ],
             ),

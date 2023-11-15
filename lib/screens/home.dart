@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:chat_app/screens/chats_tab.dart';
+import 'package:chat_app/screens/contacts_tab.dart';
 import 'package:chat_app/screens/feeds_tab.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int pageIndex = 0;
-  final List<Widget> pages = [
-    const ChatsTab(),
-    const FeedsTab(),
-    const ChatsTab(),
-  ];
+  final List<Widget> pages = [const ChatsTab(), const FeedsTab(), const ContactsTab()];
   void onChangePage(index) {
     log(pageIndex.toString());
     setState(() {
@@ -56,6 +53,8 @@ class Navbar extends StatefulWidget {
 class _NavbarState extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
+    var cs = Theme.of(context).colorScheme;
+
     return Container(
       decoration:
           BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade200, width: 0.5))),
@@ -68,20 +67,20 @@ class _NavbarState extends State<Navbar> {
           indicatorColor: Colors.transparent,
           animationDuration: const Duration(milliseconds: 0),
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          destinations: const [
+          destinations: [
             NavigationDestination(
-                icon: Icon(FluentIcons.chat_20_regular, size: 30),
-                selectedIcon: Icon(FluentIcons.chat_20_filled, color: Colors.blue, size: 30),
+                icon: const Icon(FluentIcons.chat_20_regular, size: 26),
+                selectedIcon: Icon(FluentIcons.chat_20_filled, color: cs.primary, size: 26),
                 label: 'Chats'),
             NavigationDestination(
-                icon: Icon(FluentIcons.shifts_activity_20_regular, size: 30),
+                icon: const Icon(FluentIcons.shifts_activity_20_regular, size: 26),
                 selectedIcon:
-                    Icon(FluentIcons.shifts_activity_20_filled, color: Colors.blue, size: 30),
+                    Icon(FluentIcons.shifts_activity_20_filled, color: cs.primary, size: 26),
                 label: 'Chats'),
             NavigationDestination(
-                icon: Icon(FluentIcons.book_contacts_20_regular, size: 30),
+                icon: const Icon(FluentIcons.book_contacts_20_regular, size: 26),
                 selectedIcon:
-                    Icon(FluentIcons.book_contacts_20_filled, color: Colors.blue, size: 30),
+                    Icon(FluentIcons.book_contacts_20_filled, color: cs.primary, size: 26),
                 label: 'Chats')
           ]),
     );

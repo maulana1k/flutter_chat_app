@@ -6,6 +6,8 @@ class StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
     return Container(
       width: 80,
       margin: const EdgeInsets.only(right: 12),
@@ -17,8 +19,8 @@ class StoryCard extends StatelessWidget {
               decoration: BoxDecoration(
                   gradient: isOpen
                       ? null
-                      : const LinearGradient(
-                          begin: Alignment.bottomLeft, colors: [Colors.blue, Colors.blue]),
+                      : LinearGradient(
+                          begin: Alignment.bottomLeft, colors: [cs.primary, cs.primary]),
                   borderRadius: BorderRadius.circular(50)),
               child: GestureDetector(
                 onTapUp: (TapUpDetails details) {},
@@ -29,7 +31,7 @@ class StoryCard extends StatelessWidget {
                     border: Border.all(color: Colors.white, width: 3),
                   ),
                   child: const CircleAvatar(
-                      radius: 30,
+                      radius: 32,
                       backgroundImage: NetworkImage(
                           'https://berita.yodu.id/wp-content/uploads/2023/02/profil-onic-kayes.jpg')),
                 ),
